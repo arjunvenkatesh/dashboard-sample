@@ -1,0 +1,22 @@
+.navbar {
+	min-height: 4rem;
+	background-color: #C72548;
+}
+
+.profile {
+	color: white;
+	margin-right: 100px;
+}
+
+.graph-row {
+	margin: 25px;
+}
+
+.card {
+	margin: 25px;
+	background-color: #EFF4F5;
+}
+
+.card-title {
+	text-align: right;
+}

@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+	public numbers: Array<number>;
+
+  constructor() { 
+  	this.numbers = Array(6).fill(-1);
+  }
 
   ngOnInit() {
+
   }
 
 }
