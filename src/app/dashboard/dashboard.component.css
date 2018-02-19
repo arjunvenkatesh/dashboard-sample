@@ -13,10 +13,14 @@
 }
 
 .card {
-	margin: 25px;
+	margin: 25px 10px;
 	background-color: #EFF4F5;
 }
 
 .card-title {
 	text-align: right;
+}
+
+.card-text {
+	padding: 80px;
 }

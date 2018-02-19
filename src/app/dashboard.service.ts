@@ -25,4 +25,9 @@ export class DashboardService {
 			.map((resp:Response) => resp)
 	}
 
+	getQueueDetails(queueId: number): Observable<any> {
+		return this.http.get(`${this.baseURL}/queue/${queueId}`, httpOptions)
+			.map((resp:Response) => resp)
+	}
+
 }
