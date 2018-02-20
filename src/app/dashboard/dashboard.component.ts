@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardService } from '../dashboard.service'
+import {Strophe} from 'strophe';
+import { Lisa } from 'lisa-api';
+import { DashboardService } from '../dashboard.service';
+import { AppSettings } from '../app-settings'
 
 @Component({
 	selector: 'app-dashboard',
@@ -10,12 +13,20 @@ import { DashboardService } from '../dashboard.service'
 export class DashboardComponent implements OnInit {
 
 	numbers: Array<number>;
-	// authToken: string = 'Basic dGVzdDE6Q01xdVNEOWc0a3I3Sm1hWg==';
 	company: any;
 	companyId: number;
 	queues: Array<any>;
 	queuesArray: Array<any> = [];
 	queueStatus: string = 'loading';
+
+	// Lisa API vars
+	conn: any;
+	model: any;
+
+	// server credentials
+	jid: string = AppSettings.jid;
+	password: string = AppSettings.password;
+	server: string = AppSettings.server;
 
 	constructor(private dashServ: DashboardService) {
 		this.numbers = Array(6).fill(0, 0, 6).map((x, i) => i);
@@ -24,6 +35,19 @@ export class DashboardComponent implements OnInit {
 	ngOnInit() {
 		console.log('init');
 		this.getDashboardStats();
+
+		this.conn = new Lisa.Connection();
+    	this.conn.connect(this.server, this.jid, this.password);
+
+    	this.conn.getModel().then(this.modelReady, function(msg) {
+        alert('Could not initialize: ' + msg); });
+
+	}
+
+	modelReady(newModel) {
+		console.log('modelReady');
+    	this.model = newModel;
+    	console.log(this.model);
 	}
 
 	getDashboardStats() {
